@@ -1,0 +1,1 @@
+ /home/kareem/Downloads/newsapp\ (3)/.dart_tool/flutter_build/f8c10f6e203d16bfd4a0f6fcf6fb322b/native_assets.yaml: 
