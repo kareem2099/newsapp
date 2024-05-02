@@ -19,8 +19,10 @@ class NewsArticle {
       title: json['title'] ?? 'Untitled',
       description: json['description'] ?? 'No description available',
       urlToImage: json['urlToImage'] ?? '',
-      publishedAt: json['publishedAt'] ?? '', // Parse publishedAt from json
-      content: json['content'] ?? '', // Parse content from json
+      publishedAt:
+          json['publishedAt'] ?? 'Unknown date', // Parse publishedAt from json
+      content:
+          json['content'] ?? 'Content not available', // Parse content from json
     );
   }
 }
