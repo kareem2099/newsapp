@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../models/news_article.dart'; // Import the news article model
+import '../models/news_article.dart';
+import 'package:news_app/services/web_view.dart';
 
 class NewsDetailPage extends StatelessWidget {
   final NewsArticle article;
@@ -60,6 +61,23 @@ class NewsDetailPage extends StatelessWidget {
                   'Content: ${article.content}',
                   style: TextStyle(fontSize: 16, color: Colors.grey[800]),
                 ),
+              const SizedBox(height: 10),
+              ListTile(
+                title: Text(article.title),
+                subtitle: Text(article.description),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          FadeTransition(
+                              opacity: animation1,
+                              child: WebViewPage(url: article.url)),
+                      transitionDuration: Duration(seconds: 1),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
