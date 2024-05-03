@@ -1,8 +1,8 @@
 import 'package:news_app/services/const.dart';
 import 'package:news_app/services/news_service.dart';
 
-const String _baseUrl =
-    'https://newsapi.org/v2/everything'; // Ensure this is defined
+// const String _baseUrl =
+//     'https://newsapi.org/v2/everything'; // Ensure this is defined
 
 enum NewsLanguage {
   arabic,
@@ -28,13 +28,13 @@ extension NewsLanguageExtension on NewsLanguage {
   String get url {
     switch (this) {
       case NewsLanguage.arabic:
-        return '$_baseUrl?language=ar&apiKey=$NEWS_API_KEY';
+        return 'https://newsapi.org/v2/top-headlines?country=eg&language=ar&apiKey=6111b98cef8d4f0bb16e78d0628641db';
       case NewsLanguage.english:
-        return '$_baseUrl?language=en&apiKey=$NEWS_API_KEY';
+        return 'https://newsapi.org/v2/top-headlines?country=us&language=en&apiKey=6111b98cef8d4f0bb16e78d0628641db';
       case NewsLanguage.russian:
-        return '$_baseUrl?language=ru&apiKey=$NEWS_API_KEY';
+        return 'https://newsapi.org/v2/top-headlines?country=ru&language=ru&apiKey=6111b98cef8d4f0bb16e78d0628641db';
       case NewsLanguage.french:
-        return '$_baseUrl?language=fr&apiKey=$NEWS_API_KEY';
+        return 'https://newsapi.org/v2/top-headlines?country=fr&language=fr&apiKey=6111b98cef8d4f0bb16e78d0628641db';
     }
   }
 }

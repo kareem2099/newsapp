@@ -48,6 +48,7 @@ class NewsService {
             title: article['title'] ?? 'Untitled',
             description: article['description'] ?? 'No description available',
             urlToImage: article['urlToImage'] ?? '',
+            url: article['url'] ?? '',
             publishedAt:
                 article['publishedAt'] ?? '', // Parse publishedAt from json
             content: article['content'] ?? '', // Parse content from json
