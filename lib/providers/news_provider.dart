@@ -1,8 +1,13 @@
 import 'package:flutter/foundation.dart';
 import '../models/news_article.dart';
 import '../services/news_service.dart';
+import 'package:news_app/models/enums.dart';
 
 class NewsProvider extends ChangeNotifier {
+  NewsLanguage _currentLanguage = NewsLanguage.english; // Default language
+
+  NewsLanguage get currentLanguage =>
+      _currentLanguage; // Getter for currentLanguage
   final NewsService _newsService; //declare _newsServices
   bool _isLoading = true;
   bool _hasError = false;
@@ -22,7 +27,7 @@ class NewsProvider extends ChangeNotifier {
   List<NewsArticle> get newsArticles => _newsArticles;
 
   NewsProvider() : _newsService = NewsService() {
-    fetchNews(); // Fetch news on initialization
+    fetchNews(_currentLanguage); // Fetch news on initialization
   }
 
   @override
@@ -33,38 +38,39 @@ class NewsProvider extends ChangeNotifier {
 
   void changeCategory(String category) {
     _currentCategory = category; // Change the current category
-    fetchNews(); // Fetch news for the new category
+    fetchNews(_currentLanguage); // Fetch news for the new category
   }
 
   void refreshNews() {
-    fetchNews(); // Fetch news for the current category
+    fetchNews(_currentLanguage); // Fetch news for the current category
   }
 
   // Setter methods
   void setLanguage(String language) {
     _language = language;
-    fetchNews();
+    fetchNews(_currentLanguage);
     notifyListeners();
   }
 
   void setSearchIn(String searchIn) {
     _searchIn = searchIn;
-    fetchNews();
+    fetchNews(_currentLanguage);
   }
 
   void setSortBy(String sortBy) {
     _sortBy = sortBy;
-    fetchNews();
+    fetchNews(_currentLanguage);
   }
 
-  // Inside NewsProvider class
-  void setLanguageAndFetchNews(String languageCode) {
-    setLanguage(languageCode); // Set the language
-    fetchNews(); // Fetch news articles based on the new language
+// Inside NewsProvider class
+  void setLanguageAndFetchNews(NewsLanguage language) {
+    _currentLanguage = language; // Make sure to update _currentLanguage
+    _language = language.code; // Set the language code
+    fetchNews(language); // Fetch news articles based on the new language
     notifyListeners(); // Notify listeners to rebuild UI
   }
 
-  Future<void> fetchNews() async {
+  Future<void> fetchNews(NewsLanguage language) async {
     _isLoading = true;
     _hasError = false;
     _errorMessage = null;
@@ -74,7 +80,8 @@ class NewsProvider extends ChangeNotifier {
       final news = await _newsService.getLatestNews(_currentCategory,
           language: _language,
           searchIn: _searchIn,
-          sortBy: _sortBy); // Pass category
+          sortBy: _sortBy,
+          url: language.url); // Pass category
       _newsArticles = news;
       _isLoading = false;
     } catch (e) {

@@ -1,11 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../models/news_article.dart';
+import 'const.dart';
 
 class NewsService {
   static const String _baseUrl =
-      'https://newsapi.org/v2/top-headlines'; // Updated endpoint
+      'https://newsapi.org/v2/everything'; // Updated endpoint
   final Dio _dio;
+
+  // Define your API key directly
+  static const String API_KEY =
+      NEWS_API_KEY; // implement your api as const.dart file
 
   NewsService()
       : _dio = Dio(BaseOptions(
@@ -13,17 +18,22 @@ class NewsService {
           connectTimeout: (const Duration(seconds: 10)), // 10 seconds
           receiveTimeout: (const Duration(seconds: 8)), // 8 seconds
           headers: {
-            'Authorization':
-                'Bearer ${dotenv.env['API_KEY']!}', // Secure API key
+            'Authorization': 'Bearer $API_KEY', // Use the API key directly
           },
         ));
 
   Future<List<NewsArticle>> getLatestNews(String category,
       {String language = 'en',
       String searchIn = '',
-      String sortBy = 'publishedAt'}) async {
+      String sortBy = 'publishedAt',
+      String? url}) async {
+    // Add url parameter
+    if (url == null) {
+      throw Exception('URL cannot be null');
+    }
     try {
-      final response = await _dio.get('', queryParameters: {
+      final response = await _dio.get(url, queryParameters: {
+        // Use url parameter
         'category': category,
         'language': language,
         'q': searchIn,

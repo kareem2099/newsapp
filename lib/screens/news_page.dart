@@ -16,12 +16,12 @@ class NewsPage extends StatefulWidget {
 class _NewsPageState extends State<NewsPage> {
   int value = 0;
   final List<Map<String, String>> categories = [
-    {'name': 'Business', 'icon': 'images/business.png'},
-    {'name': 'Entertainment', 'icon': 'images/entertainment.png'},
-    {'name': 'Health', 'icon': 'images/health.png'},
-    {'name': 'Science', 'icon': 'images/science.png'},
-    {'name': 'Sports', 'icon': 'images/sport.png'},
-    {'name': 'Technology', 'icon': 'images/technology.png'},
+    {'name': 'Business', 'icon': 'assets/images/business.png'},
+    {'name': 'Entertainment', 'icon': 'assets/images/entertainment.png'},
+    {'name': 'Health', 'icon': 'assets/images/health.png'},
+    {'name': 'Science', 'icon': 'assets/images/science.png'},
+    {'name': 'Sports', 'icon': 'assets/images/sport.png'},
+    {'name': 'Technology', 'icon': 'assets/images/technology.png'},
   ];
 
   @override
@@ -33,24 +33,14 @@ class _NewsPageState extends State<NewsPage> {
       body: Column(
         children: [
           AnimatedToggleSwitch<NewsLanguage>.rolling(
-            current: NewsLanguage.english,
+            current: newsProvider.currentLanguage,
             values: NewsLanguage.values.toList(),
             onChanged: (language) {
-              // final languageCode = language.code;
               Provider.of<NewsProvider>(context, listen: false)
-                  .setLanguageAndFetchNews(language.code);
+                  .setLanguageAndFetchNews(language);
             },
             iconBuilder: (language, isSelected) {
-              switch (language) {
-                case NewsLanguage.arabic:
-                  return const Text("AR");
-                case NewsLanguage.english:
-                  return const Text("EN");
-                case NewsLanguage.russian:
-                  return const Text("RU");
-                case NewsLanguage.french:
-                  return const Text("FR");
-              }
+              return Text(language.code.toUpperCase());
             },
           ),
           SizedBox(
@@ -112,7 +102,7 @@ class _NewsPageState extends State<NewsPage> {
                 ? const Center(child: CircularProgressIndicator())
                 : RefreshIndicator(
                     onRefresh: () async {
-                      newsProvider.fetchNews();
+                      newsProvider.fetchNews(newsProvider.currentLanguage);
                     },
                     child: ListView.builder(
                       itemCount: newsProvider.newsArticles.length,
