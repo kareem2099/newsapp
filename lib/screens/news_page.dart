@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/news_provider.dart';
-import 'package:news_app/models/news_detail_page.dart';
+import 'package:news_app/screens/news_detail_page.dart';
 import 'package:news_app/models/enums.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';

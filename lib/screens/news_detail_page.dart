@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../models/news_article.dart';
-import 'package:news_app/services/web_view.dart';
+import 'package:news_app/screens/web_view.dart';
 
 class NewsDetailPage extends StatelessWidget {
   final NewsArticle article;
@@ -73,7 +73,7 @@ class NewsDetailPage extends StatelessWidget {
                           FadeTransition(
                               opacity: animation1,
                               child: WebViewPage(url: article.url)),
-                      transitionDuration: Duration(seconds: 1),
+                      transitionDuration: const Duration(seconds: 1),
                     ),
                   );
                 },

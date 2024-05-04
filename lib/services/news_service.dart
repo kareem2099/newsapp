@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
-import '../models/news_article.dart';
-import 'const.dart';
+import 'package:news_app/models/news_article.dart';
+import 'package:news_app/api/const.dart';
 
 class NewsService {
   static const String _baseUrl =

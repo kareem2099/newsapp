@@ -1,5 +1,4 @@
-import 'package:news_app/services/const.dart';
-import 'package:news_app/services/news_service.dart';
+import 'package:news_app/api/const.dart';
 
 // const String _baseUrl =
 //     'https://newsapi.org/v2/everything'; // Ensure this is defined
@@ -28,13 +27,13 @@ extension NewsLanguageExtension on NewsLanguage {
   String get url {
     switch (this) {
       case NewsLanguage.arabic:
-        return 'https://newsapi.org/v2/top-headlines?country=eg&language=ar&apiKey=6111b98cef8d4f0bb16e78d0628641db';
+        return 'https://newsapi.org/v2/top-headlines?country=eg&language=ar&apiKey=$NEWS_API_KEY';
       case NewsLanguage.english:
-        return 'https://newsapi.org/v2/top-headlines?country=us&language=en&apiKey=6111b98cef8d4f0bb16e78d0628641db';
+        return 'https://newsapi.org/v2/top-headlines?country=us&language=en&apiKey=$NEWS_API_KEY';
       case NewsLanguage.russian:
-        return 'https://newsapi.org/v2/top-headlines?country=ru&language=ru&apiKey=6111b98cef8d4f0bb16e78d0628641db';
+        return 'https://newsapi.org/v2/top-headlines?country=ru&language=ru&apiKey=$NEWS_API_KEY';
       case NewsLanguage.french:
-        return 'https://newsapi.org/v2/top-headlines?country=fr&language=fr&apiKey=6111b98cef8d4f0bb16e78d0628641db';
+        return 'https://newsapi.org/v2/top-headlines?country=fr&language=fr&apiKey=$NEWS_API_KEY';
     }
   }
 }
