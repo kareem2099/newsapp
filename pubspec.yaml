@@ -17,6 +17,7 @@ dependencies:
   cached_network_image: ^3.3.1
   animated_toggle_switch: ^0.8.2
   webview_flutter: ^4.7.0
+  webview_flutter_android: ^3.16.1
 
 dev_dependencies:
   flutter_test:
